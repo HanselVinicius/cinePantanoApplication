@@ -9,5 +9,4 @@ class InsertMovieGatewayImpl : InsertMovieGateway {
     override fun insertMovie(movie: Movie) {
         println("Inserting movie: $movie")
     }
-
 }

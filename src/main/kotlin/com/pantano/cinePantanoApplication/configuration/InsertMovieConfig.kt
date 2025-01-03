@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration
 @Configuration
 class InsertMovieConfig {
     @Bean
-    fun insertMovie(insertMovieGateway: InsertMovieGateway) : InsertMovieService {
+    fun insertMovie(insertMovieGateway: InsertMovieGateway): InsertMovieService {
         return InsertMovieUseCase(insertMovieGateway)
     }
 }

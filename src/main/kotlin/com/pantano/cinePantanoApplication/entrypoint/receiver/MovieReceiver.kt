@@ -12,9 +12,12 @@ class MovieReceiver(val insertMovieService: InsertMovieService) {
 
     @RabbitListener(queues = ["movieQueue"])
     fun receiveMovie(movie: MovieMessageDto) {
-        insertMovieService.insertMovie(MovieFactory.createMovie(
-            movie.title,
-            LocalDate.of(movie.launchDate.year,movie.launchDate.month,movie.launchDate.dayOfYear),
-            movie.duration))
+        insertMovieService.insertMovie(
+            MovieFactory.createMovie(
+                movie.title,
+                LocalDate.of(movie.launchDate.year, movie.launchDate.month, movie.launchDate.dayOfYear),
+                movie.duration
+            )
+        )
     }
 }
