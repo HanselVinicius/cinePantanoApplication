@@ -5,6 +5,6 @@ import java.time.LocalDate
 
 object MovieFactory {
     fun createMovie(title: String, launchDate: LocalDate, duration: Int): Movie {
-        return Movie(null, title, launchDate, duration, null)
+        return Movie(null, title, launchDate, duration, null, true)
     }
 }

@@ -15,7 +15,7 @@ class MovieReceiver(val insertMovieService: InsertMovieService) {
         insertMovieService.insertMovie(
             MovieFactory.createMovie(
                 movie.title,
-                LocalDate.of(movie.launchDate.year, movie.launchDate.month, movie.launchDate.dayOfYear),
+                LocalDate.of(movie.launchDate.year, movie.launchDate.monthValue, movie.launchDate.dayOfMonth),
                 movie.duration
             )
         )

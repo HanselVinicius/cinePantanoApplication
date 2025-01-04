@@ -7,5 +7,6 @@ class Movie(
     val title: String,
     val launchDate: LocalDate,
     val duration: Int,
-    val review: List<Review>?
+    val review: Set<Review>?,
+    val enabled: Boolean
 )

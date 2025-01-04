@@ -4,8 +4,9 @@ import com.pantano.cinePantanoApplication.core.domain.author.Author
 
 class Review(
     val id: Long,
-    val movieId: Long,
+    val movie: Movie,
     val review: String,
     val rating: Int,
-    val author: Author
+    val author: Author,
+    val enabled: Boolean
 )
