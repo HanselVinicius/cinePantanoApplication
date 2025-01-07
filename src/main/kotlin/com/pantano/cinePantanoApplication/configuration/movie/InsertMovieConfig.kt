@@ -1,4 +1,4 @@
-package com.pantano.cinePantanoApplication.configuration
+package com.pantano.cinePantanoApplication.configuration.movie
 
 import com.pantano.cinePantanoApplication.core.application.InsertMovieUseCase
 import com.pantano.cinePantanoApplication.core.application.gateway.InsertMovieGateway

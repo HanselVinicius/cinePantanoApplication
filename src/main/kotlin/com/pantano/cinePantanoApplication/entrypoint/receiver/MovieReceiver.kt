@@ -8,12 +8,12 @@ import org.springframework.stereotype.Component
 import java.time.LocalDate
 
 @Component
-class MovieReceiver(val insertMovieService: InsertMovieService) {
+class MovieReceiver(val insertMovieService: InsertMovieService, val movieFactory: MovieFactory) {
 
     @RabbitListener(queues = ["movieQueue"])
     fun receiveMovie(movie: MovieMessageDto) {
         insertMovieService.insertMovie(
-            MovieFactory.createMovie(
+            movieFactory.createMovie(
                 movie.title,
                 LocalDate.of(movie.launchDate.year, movie.launchDate.monthValue, movie.launchDate.dayOfMonth),
                 movie.duration
