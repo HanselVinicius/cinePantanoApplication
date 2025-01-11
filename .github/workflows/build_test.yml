@@ -1,5 +1,4 @@
-
-name: CI
+name: Kotlin CI with Gradle
 
 on:
   push:
@@ -7,19 +6,25 @@ on:
   pull_request:
     branches: [ "main" ]
 
-  workflow_dispatch:
-
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: 21
 
-      - name: Run a one-line script
-        run: echo Hello, world!
+      - name: Build with Gradle
+        uses: eskatos/gradle-command-action@v3
+        with:
+          gradle-version: current
+          arguments: build
 
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+      - name: Run Tests with Gradle
+        uses: eskatos/gradle-command-action@v3
+        with:
+          gradle-version: current
+          arguments: test
