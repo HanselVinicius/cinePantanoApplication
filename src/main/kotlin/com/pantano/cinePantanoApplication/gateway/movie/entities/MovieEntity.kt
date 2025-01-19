@@ -1,4 +1,4 @@
-package com.pantano.cinePantanoApplication.gateway.movie
+package com.pantano.cinePantanoApplication.gateway.movie.entities
 
 import jakarta.persistence.Column
 import jakarta.persistence.Entity

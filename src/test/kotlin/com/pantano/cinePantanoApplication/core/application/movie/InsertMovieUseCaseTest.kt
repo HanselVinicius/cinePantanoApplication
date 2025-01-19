@@ -1,6 +1,6 @@
-package com.pantano.cinePantanoApplication.core.application
+package com.pantano.cinePantanoApplication.core.application.movie
 
-import com.pantano.cinePantanoApplication.core.application.gateway.InsertMovieGateway
+import com.pantano.cinePantanoApplication.core.application.gateway.movie.InsertMovieGateway
 import com.pantano.cinePantanoApplication.core.domain.movie.Movie
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito.mock

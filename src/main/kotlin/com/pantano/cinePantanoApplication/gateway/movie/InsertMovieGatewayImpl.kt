@@ -1,7 +1,8 @@
 package com.pantano.cinePantanoApplication.gateway.movie
 
-import com.pantano.cinePantanoApplication.core.application.gateway.InsertMovieGateway
+import com.pantano.cinePantanoApplication.core.application.gateway.movie.InsertMovieGateway
 import com.pantano.cinePantanoApplication.core.domain.movie.Movie
+import com.pantano.cinePantanoApplication.gateway.movie.entities.MovieRepository
 import com.pantano.cinePantanoApplication.gateway.movie.mapper.MovieEntityMapper
 import org.springframework.stereotype.Component
 

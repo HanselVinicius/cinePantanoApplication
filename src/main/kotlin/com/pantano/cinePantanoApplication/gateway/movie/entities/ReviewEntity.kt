@@ -1,6 +1,6 @@
-package com.pantano.cinePantanoApplication.gateway.movie
+package com.pantano.cinePantanoApplication.gateway.movie.entities
 
-import com.pantano.cinePantanoApplication.gateway.author.AuthorEntity
+import com.pantano.cinePantanoApplication.gateway.author.entities.AuthorEntity
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue

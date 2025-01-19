@@ -1,8 +1,8 @@
 package com.pantano.cinePantanoApplication.gateway.movie.mapper
 
 import com.pantano.cinePantanoApplication.core.domain.movie.Review
-import com.pantano.cinePantanoApplication.gateway.author.AuthorEntityMapper
-import com.pantano.cinePantanoApplication.gateway.movie.ReviewEntity
+import com.pantano.cinePantanoApplication.gateway.author.mapper.AuthorEntityMapper
+import com.pantano.cinePantanoApplication.gateway.movie.entities.ReviewEntity
 
 object ReviewEntityMapper {
     fun toEntity(review: Review): ReviewEntity {
@@ -18,7 +18,10 @@ object ReviewEntityMapper {
         )
     }
 
-    fun toEntitySimplified(review: Review): ReviewEntity {
+    fun toEntitySimplified(review: Review?): ReviewEntity? {
+        if (review == null) {
+            return null
+        }
         return ReviewEntity(
             id = review.id,
             author = AuthorEntityMapper.toEntity(review.author),

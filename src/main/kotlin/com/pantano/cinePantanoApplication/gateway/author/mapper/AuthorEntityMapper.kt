@@ -1,6 +1,7 @@
-package com.pantano.cinePantanoApplication.gateway.author
+package com.pantano.cinePantanoApplication.gateway.author.mapper
 
 import com.pantano.cinePantanoApplication.core.domain.author.Author
+import com.pantano.cinePantanoApplication.gateway.author.entities.AuthorEntity
 import com.pantano.cinePantanoApplication.gateway.movie.mapper.ReviewEntityMapper
 
 object AuthorEntityMapper {
@@ -11,7 +12,8 @@ object AuthorEntityMapper {
             createdAt = null,
             updatedAt = null,
             review = author.review.map { review -> ReviewEntityMapper.toEntitySimplified(review) }.toSet(),
-            enabled = author.enabled
+            enabled = author.enabled,
+            isBot = author.isBot
         )
     }
 }

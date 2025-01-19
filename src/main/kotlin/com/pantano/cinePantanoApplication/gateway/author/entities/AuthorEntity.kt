@@ -1,9 +1,7 @@
-package com.pantano.cinePantanoApplication.gateway.author
+package com.pantano.cinePantanoApplication.gateway.author.entities
 
-import com.pantano.cinePantanoApplication.gateway.movie.ReviewEntity
+import com.pantano.cinePantanoApplication.gateway.movie.entities.ReviewEntity
 import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.OneToMany
 import jakarta.persistence.Table
@@ -15,12 +13,12 @@ import java.time.LocalDate
 @SQLRestriction("enabled = true")
 class AuthorEntity(
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long,
     val name: String,
     @OneToMany(mappedBy = "author")
-    val review: Set<ReviewEntity>,
+    val review: Set<ReviewEntity?>,
     val createdAt: LocalDate?,
     val updatedAt: LocalDate?,
+    val isBot: Boolean,
     val enabled: Boolean
 )

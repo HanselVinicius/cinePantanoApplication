@@ -1,4 +1,4 @@
-package com.pantano.cinePantanoApplication.core.application.gateway
+package com.pantano.cinePantanoApplication.core.application.gateway.movie
 
 import com.pantano.cinePantanoApplication.core.domain.movie.Movie
 

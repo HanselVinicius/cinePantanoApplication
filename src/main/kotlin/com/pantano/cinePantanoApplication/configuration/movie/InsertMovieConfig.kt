@@ -1,7 +1,7 @@
 package com.pantano.cinePantanoApplication.configuration.movie
 
-import com.pantano.cinePantanoApplication.core.application.InsertMovieUseCase
-import com.pantano.cinePantanoApplication.core.application.gateway.InsertMovieGateway
+import com.pantano.cinePantanoApplication.core.application.gateway.movie.InsertMovieGateway
+import com.pantano.cinePantanoApplication.core.application.movie.InsertMovieUseCase
 import com.pantano.cinePantanoApplication.core.domain.movie.service.InsertMovieService
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

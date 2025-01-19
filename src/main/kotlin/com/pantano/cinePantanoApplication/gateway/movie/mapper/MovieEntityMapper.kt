@@ -1,7 +1,7 @@
 package com.pantano.cinePantanoApplication.gateway.movie.mapper
 
 import com.pantano.cinePantanoApplication.core.domain.movie.Movie
-import com.pantano.cinePantanoApplication.gateway.movie.MovieEntity
+import com.pantano.cinePantanoApplication.gateway.movie.entities.MovieEntity
 
 object MovieEntityMapper {
     fun toEntity(movie: Movie): MovieEntity {
