@@ -2,6 +2,7 @@ package com.pantano.cinePantanoApplication.gateway.movie.mapper
 
 import com.pantano.cinePantanoApplication.core.domain.movie.Movie
 import com.pantano.cinePantanoApplication.gateway.movie.entities.MovieEntity
+import com.pantano.cinePantanoApplication.gateway.movie.entities.MovieStatusEntity
 
 object MovieEntityMapper {
     fun toEntity(movie: Movie): MovieEntity {
@@ -15,7 +16,9 @@ object MovieEntityMapper {
             },
             createdAt = null,
             updatedAt = null,
-            enabled = movie.enabled
+            enabled = movie.enabled,
+            movieStatus = MovieStatusEntity.valueOf(movie.movieStatus.name),
+            image = movie.image
         )
     }
 
@@ -28,7 +31,9 @@ object MovieEntityMapper {
             review = null,
             createdAt = null,
             updatedAt = null,
-            enabled = movie.enabled
+            enabled = movie.enabled,
+            movieStatus = MovieStatusEntity.valueOf(movie.movieStatus.name),
+            image = movie.image
         )
     }
 }

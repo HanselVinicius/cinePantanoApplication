@@ -5,6 +5,7 @@ import com.pantano.cinePantanoApplication.gateway.author.entities.AuthorEntity
 import jakarta.persistence.Entity
 import jakarta.persistence.Id
 import jakarta.persistence.JoinColumn
+import jakarta.persistence.Lob
 import jakarta.persistence.OneToMany
 import jakarta.persistence.OneToOne
 import jakarta.persistence.Table
@@ -17,6 +18,7 @@ import java.time.LocalDate
 class MessageEntity(
     @Id
     val id: Long,
+    @Lob
     val content: String,
     val channelId: Long,
     val guildId: Long,
@@ -25,7 +27,7 @@ class MessageEntity(
     val author: AuthorEntity,
     val timestamp: LocalDate,
     @OneToMany(targetEntity = AttachmentEntity::class, mappedBy = "messageEntity")
-    val attachmentEntity: Set<AttachmentEntity>,
+    var attachmentEntity: Set<AttachmentEntity>,
     val type: MessageType,
     val enabled: Boolean,
     val createdAt: LocalDate,

@@ -3,7 +3,7 @@ create table message
     id         bigint       not null
         primary key,
     channel_id bigint       not null,
-    content    varchar(255) null,
+    content    TEXT         null,
     created_at date         null,
     enabled    bit          not null,
     guild_id   bigint       not null,

@@ -14,7 +14,7 @@ class InsertMovieUseCaseTest {
         // arrange
         val insertMovieGateway = mock<InsertMovieGateway>()
         val insertMovieUseCase = InsertMovieUseCase(insertMovieGateway)
-        val movie = Movie(0, "description", LocalDate.now(), 10, null, true)
+        val movie = Movie(0, "description", LocalDate.now(), 10, null, "", true)
         // act
         insertMovieUseCase.insertMovie(movie)
         // assert

@@ -1,6 +1,7 @@
 package com.pantano.cinePantanoApplication.entrypoint.receiver
 
 import com.pantano.cinePantanoApplication.core.domain.movie.Movie
+import com.pantano.cinePantanoApplication.core.domain.movie.MovieStatus
 import com.pantano.cinePantanoApplication.core.domain.movie.factory.MovieFactory
 import com.pantano.cinePantanoApplication.core.domain.movie.service.InsertMovieService
 import com.pantano.cinePantanoApplication.entrypoint.dto.MovieMessageDto
@@ -20,7 +21,16 @@ class MovieReceiverTest {
         val movieFactory = mock<MovieFactory>()
         val movieReceiver = MovieReceiver(insertMovieService, movieFactory)
 
-        val createdMovie = Movie(title = "title", launchDate = LocalDate.of(2024, 1, 1), duration = 120, id = null, enabled = true, review = null)
+        val createdMovie = Movie(
+            title = "title",
+            launchDate = LocalDate.of(2024, 1, 1),
+            duration = 120,
+            id = null,
+            enabled = true,
+            movieStatus = MovieStatus.TO_WATCH,
+            image = "",
+            review = null
+        )
 
         `when`(movieFactory.createMovie(movie.title, LocalDate.of(movie.launchDate.year, movie.launchDate.monthValue, movie.launchDate.dayOfMonth), movie.duration))
             .thenReturn(createdMovie)

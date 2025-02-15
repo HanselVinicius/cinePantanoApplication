@@ -2,6 +2,7 @@ package com.pantano.cinePantanoApplication.gateway.author.mapper
 
 import com.pantano.cinePantanoApplication.core.domain.author.Author
 import com.pantano.cinePantanoApplication.core.domain.movie.Movie
+import com.pantano.cinePantanoApplication.core.domain.movie.MovieStatus
 import com.pantano.cinePantanoApplication.core.domain.movie.Review
 import org.junit.jupiter.api.Assertions.assertEquals
 import java.time.LocalDate
@@ -30,7 +31,9 @@ class AuthorEntityMapperTest {
                 id = 1L,
                 duration = 120,
                 review = emptySet(),
-                enabled = true
+                enabled = true,
+                image = "",
+                movieStatus = MovieStatus.TO_WATCH
             )
         )
 

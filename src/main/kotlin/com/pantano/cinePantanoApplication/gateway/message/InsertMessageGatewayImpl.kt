@@ -14,10 +14,16 @@ class InsertMessageGatewayImpl(
 ) : InsertMessageGateway {
     override fun insertMessage(message: Message) {
         val messageEntity = MessageEntityMapper.toEntity(message)
-        messageEntity.attachmentEntity.forEach(this.attachmentRepository::save)
+
         if (messageRepository.existsById(message.id)) {
             return
         }
+        val attachments = messageEntity.attachmentEntity
+        messageEntity.attachmentEntity = emptySet()
         messageRepository.save(messageEntity)
+        attachments.forEach {
+            it.messageEntity = messageEntity
+            attachmentRepository.save(it)
+        }
     }
 }

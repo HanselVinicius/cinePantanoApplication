@@ -20,7 +20,7 @@ class AttachmentEntity(
     val url: String,
     @ManyToOne(targetEntity = MessageEntity::class)
     @JoinColumn(name = "message_id", referencedColumnName = "id")
-    val messageEntity: MessageEntity?,
+    var messageEntity: MessageEntity?,
     val enabled: Boolean,
     val createdAt: LocalDate,
     val updatedAt: LocalDate?

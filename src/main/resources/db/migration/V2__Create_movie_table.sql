@@ -6,6 +6,6 @@ create table movie
     duration    int          not null,
     enabled     bit          not null,
     launch_date date         null,
-    title       varchar(255) null,
+    title       TEXT         null,
     updated_at  date         null
 );
