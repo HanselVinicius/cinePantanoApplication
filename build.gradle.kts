@@ -59,7 +59,9 @@ allOpen {
 
 tasks.withType<Test> {
     useJUnitPlatform()
-    exclude("**/*IT.class")
+    if (System.getenv("ENVIRONMENT") == null){
+        exclude("**/*IT.class")
+    }
 }
 
 ktlint {
