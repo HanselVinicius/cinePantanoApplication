@@ -33,7 +33,7 @@ class AuthControllerTestIT {
 
     @Test
     @WithMockUser(username = "admin", password = "admin", roles = ["INTEGRATION"])
-    fun shouldRegisterUser(){
+    fun shouldRegisterUser() {
         mockMvc.perform(
             MockMvcRequestBuilders.post("/v1/auth/register")
                 .contentType("application/json")

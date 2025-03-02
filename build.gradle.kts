@@ -59,7 +59,7 @@ allOpen {
 
 tasks.withType<Test> {
     useJUnitPlatform()
-    if (System.getenv("ENVIRONMENT") == null){
+    if (System.getenv("ENVIRONMENT") == null) {
         exclude("**/*IT.class")
     }
 }
