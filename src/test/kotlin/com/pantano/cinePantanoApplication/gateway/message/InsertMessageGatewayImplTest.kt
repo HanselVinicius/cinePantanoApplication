@@ -9,7 +9,13 @@ import com.pantano.cinePantanoApplication.gateway.message.entities.AttachmentEnt
 import com.pantano.cinePantanoApplication.gateway.message.entities.AttachmentRepository
 import com.pantano.cinePantanoApplication.gateway.message.entities.MessageEntity
 import com.pantano.cinePantanoApplication.gateway.message.entities.MessageRepository
+import com.pantano.cinePantanoApplication.gateway.message.mapper.MessageEntityMapper
+import io.mockk.every
+import io.mockk.mockkObject
+import org.mockito.BDDMockito.never
+import org.mockito.BDDMockito.times
 import org.mockito.Mockito.mock
+import org.mockito.Mockito.verify
 import org.mockito.Mockito.`when`
 import java.time.LocalDate
 import kotlin.test.Test
@@ -64,6 +70,8 @@ class InsertMessageGatewayImplTest {
             createdAt = LocalDate.now(),
             updatedAt = null
         )
+        mockkObject(MessageEntityMapper)
+        every { MessageEntityMapper.toEntity(message) } returns messageEntity
         val messageRepository: MessageRepository = mock(MessageRepository::class.java)
         val attachmentRepository: AttachmentRepository = mock(AttachmentRepository::class.java)
         val insertMessageGateway = InsertMessageGatewayImpl(messageRepository, attachmentRepository)
@@ -74,6 +82,8 @@ class InsertMessageGatewayImplTest {
         // assert
         `when`(messageRepository.save(messageEntity)).thenReturn(messageEntity)
         `when`(attachmentRepository.save(attachmentEntity)).thenReturn(attachmentEntity)
+        verify(messageRepository).save(messageEntity)
+        verify(attachmentRepository).save(attachmentEntity)
     }
 
     @Test
@@ -133,5 +143,6 @@ class InsertMessageGatewayImplTest {
 
         // assert
         `when`(messageRepository.existsById(messageEntity.id)).thenReturn(true)
+        verify(messageRepository, never()).save(messageEntity)
     }
 }
