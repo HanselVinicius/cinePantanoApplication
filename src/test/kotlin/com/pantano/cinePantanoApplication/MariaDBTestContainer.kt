@@ -8,15 +8,14 @@ import java.util.concurrent.atomic.AtomicBoolean
 
 class MariaDBTestContainer : BeforeAllCallback {
 
-    companion object{
+    companion object {
         var containerStarted = AtomicBoolean(false)
         val mariaDBContainer: GenericContainer<*> = GenericContainer(DockerImageName.parse("mariadb")).withExposedPorts(3306)
             .withEnv("MYSQL_ROOT_PASSWORD", "mariadbrootPW")
     }
 
-
     override fun beforeAll(context: ExtensionContext?) {
-        if(containerStarted.get()){
+        if (containerStarted.get()) {
             return
         }
         mariaDBContainer.start()

@@ -6,13 +6,11 @@ import com.pantano.cinePantanoApplication.gateway.auth.entities.AuthEntityReposi
 import com.pantano.cinePantanoApplication.gateway.auth.entities.UserRoleEntity
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
-
 import org.springframework.security.test.context.support.WithMockUser
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
-
 
 @IntegrationTest
 class AuthControllerTestIT {
@@ -23,16 +21,17 @@ class AuthControllerTestIT {
     @Autowired
     lateinit var authEntityRepository: AuthEntityRepository
 
-
     @Test
     fun shouldAuthenticate() {
-        authEntityRepository.save(AuthEntity(
-            principal = "admin",
-            credentials = "\$2a\$10\$3mMYqDrGbIYad.niYfW4H.qgcpvI01aVGQQKALZdYp.mqH0vv3Pne",
-            roles = UserRoleEntity.INTEGRATION,
-            id = null,
-            enabled = true
-        ))
+        authEntityRepository.save(
+            AuthEntity(
+                principal = "admin",
+                credentials = "\$2a\$10\$3mMYqDrGbIYad.niYfW4H.qgcpvI01aVGQQKALZdYp.mqH0vv3Pne",
+                roles = UserRoleEntity.INTEGRATION,
+                id = null,
+                enabled = true
+            )
+        )
         mockMvc.perform(
             MockMvcRequestBuilders.post("/v1/auth/authenticate")
                 .contentType("application/json")
