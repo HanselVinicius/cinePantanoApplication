@@ -32,6 +32,7 @@ dependencies {
     implementation("com.auth0:java-jwt:4.5.0")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.5")
     testImplementation("io.mockk:mockk:1.13.17")
+    testImplementation("org.springframework.boot:spring-boot-testcontainers")
 
     implementation("org.flywaydb:flyway-core")
     implementation("org.flywaydb:flyway-mysql")
