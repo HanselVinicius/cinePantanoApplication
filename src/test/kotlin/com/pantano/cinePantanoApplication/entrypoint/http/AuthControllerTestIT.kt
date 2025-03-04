@@ -4,8 +4,6 @@ import com.pantano.cinePantanoApplication.IntegrationTest
 import com.pantano.cinePantanoApplication.gateway.auth.entities.AuthEntity
 import com.pantano.cinePantanoApplication.gateway.auth.entities.AuthEntityRepository
 import com.pantano.cinePantanoApplication.gateway.auth.entities.UserRoleEntity
-import org.junit.jupiter.api.AfterAll
-import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 
