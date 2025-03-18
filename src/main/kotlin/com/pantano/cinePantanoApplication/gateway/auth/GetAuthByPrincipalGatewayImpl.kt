@@ -17,6 +17,7 @@ class GetAuthByPrincipalGatewayImpl(private val authEntityRepository: AuthEntity
     }
 
     override fun loadUserByUsername(username: String?): UserDetails {
-        return authEntityRepository.findByPrincipal(username!!)
+        val result = authEntityRepository.findByPrincipal(username!!)
+        return result
     }
 }

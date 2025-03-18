@@ -5,6 +5,17 @@ import com.pantano.cinePantanoApplication.gateway.author.entities.AuthorEntity
 import com.pantano.cinePantanoApplication.gateway.movie.mapper.ReviewEntityMapper
 
 object AuthorEntityMapper {
+
+    fun toDomain(author: AuthorEntity): Author {
+        return Author(
+            id = author.id,
+            name = author.name,
+            review = author.review.map { review -> ReviewEntityMapper.toDomain(review!!) },
+            enabled = author.enabled,
+            isBot = author.isBot
+        )
+    }
+
     fun toEntity(author: Author): AuthorEntity {
         return AuthorEntity(
             id = author.id,

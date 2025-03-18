@@ -39,4 +39,8 @@ class AuthEntity(
     override fun isEnabled(): Boolean {
         return enabled
     }
+
+    override fun toString(): String {
+        return "AuthEntity(id=$id, principal='$principal', credentials='$credentials', enabled=$enabled, roles=$roles)"
+    }
 }
