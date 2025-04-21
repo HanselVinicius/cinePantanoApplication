@@ -20,7 +20,7 @@ class MovieController(private val getMovieService: GetMovieService) {
         @RequestParam(required = true) page: Int,
         @RequestParam(required = false) limit: Int?,
         @RequestParam(required = false) nameLike: String?,
-        @RequestParam(required = false) movieStatus: MovieStatus?,
+        @RequestParam(required = false) movieStatus: MovieStatus?
     ): List<Movie> {
         val queryMovieDto = QueryMovieDto(
             page = page,

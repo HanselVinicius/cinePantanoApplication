@@ -15,7 +15,7 @@ class GetMoviesUseCaseTest {
         val getMoviesUseCase = GetMoviesUseCase(getMovieGateway)
         val page = 1
         val limit = 10
-        val queryMovieDto = QueryMovieDto(page,limit,null, null)
+        val queryMovieDto = QueryMovieDto(page, limit, null, null)
         // act
         getMoviesUseCase.getMovies(queryMovieDto)
         // assert

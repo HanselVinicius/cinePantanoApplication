@@ -10,13 +10,13 @@ import org.springframework.data.jpa.domain.Specification
 
 class MovieSpecification(
     private val titleName: String?,
-    private val movieEntityStatus: MovieStatusEntity?) : Specification<MovieEntity> {
+    private val movieEntityStatus: MovieStatusEntity?
+) : Specification<MovieEntity> {
     override fun toPredicate(
         root: Root<MovieEntity>,
         query: CriteriaQuery<*>?,
         criteriaBuilder: CriteriaBuilder
     ): Predicate? {
-
         val predicates = mutableListOf<Predicate>()
 
         titleName?.let {
@@ -28,7 +28,5 @@ class MovieSpecification(
         }
 
         return criteriaBuilder.and(*predicates.toTypedArray())
-
     }
-
 }

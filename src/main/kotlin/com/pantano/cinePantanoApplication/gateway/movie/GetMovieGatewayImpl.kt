@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component
 @Component
 class GetMovieGatewayImpl(private val movieEntityRepository: MovieEntityRepository) : GetMovieGateway {
     override fun getMovies(queryMovieDto: QueryMovieDto): List<Movie> {
-
         val movieEntityStatus = queryMovieDto.movieStatus.let {
             if (it == null) MovieStatusEntity.TO_WATCH else MovieStatusEntity.valueOf(it.name)
         }
@@ -25,7 +24,7 @@ class GetMovieGatewayImpl(private val movieEntityRepository: MovieEntityReposito
 
         val movieEntity = movieEntityRepository.findAll(
             movieSpecification,
-            PageRequest.of(queryMovieDto.page, queryMovieDto.limit ?: 10),
+            PageRequest.of(queryMovieDto.page, queryMovieDto.limit ?: 10)
         )
 
         val movieList = movieEntity.map {

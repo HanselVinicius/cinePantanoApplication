@@ -6,5 +6,5 @@ data class QueryMovieDto(
     val page: Int,
     val limit: Int? = 10,
     val titleLike: String?,
-    val movieStatus: MovieStatus?,
+    val movieStatus: MovieStatus?
 )
