@@ -6,6 +6,7 @@ import com.pantano.cinePantanoApplication.gateway.auth.entities.AuthEntityReposi
 import com.pantano.cinePantanoApplication.gateway.auth.entities.UserRoleEntity
 import com.pantano.cinePantanoApplication.gateway.movie.entities.MovieEntity
 import com.pantano.cinePantanoApplication.gateway.movie.entities.MovieEntityRepository
+import com.pantano.cinePantanoApplication.gateway.movie.entities.MovieStatusEntity
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -44,14 +45,15 @@ class MovieControllerTestIT {
 
     @Test
     @WithMockUser(username = "admin", password = "admin", roles = ["INTEGRATION"])
-    fun getMovies() {
-        this.movieEntityRepository.save(
+    fun getToWatchMovies() {
+        val savedMovie = this.movieEntityRepository.save(
             MovieEntity(
                 enabled = true,
                 id = null,
                 title = "Test",
-                launchDate = LocalDate.now(),
+                launchDate = LocalDate.of(2025,3,17),
                 duration = 120,
+                movieStatus = MovieStatusEntity.TO_WATCH,
                 image = "image",
                 createdAt = LocalDate.now(),
                 updatedAt = LocalDate.now(),
@@ -64,6 +66,62 @@ class MovieControllerTestIT {
         )
             .andDo(MockMvcResultHandlers.print())
             .andExpect(status().isOk)
-            .andExpect(content().string("[{\"id\":1,\"title\":\"Test\",\"launchDate\":[2025,3,17],\"duration\":120,\"review\":[],\"image\":\"image\",\"enabled\":true,\"movieStatus\":\"TO_WATCH\"}]"))
+            .andExpect(content().string("[{\"id\":${savedMovie.id},\"title\":\"Test\",\"launchDate\":[2025,3,17],\"duration\":120,\"review\":[],\"image\":\"image\",\"enabled\":true,\"movieStatus\":\"TO_WATCH\"}]"))
     }
+
+
+    @Test
+    @WithMockUser(username = "admin", password = "admin", roles = ["INTEGRATION"])
+    fun getWatchedMovies() {
+        val savedMovie = this.movieEntityRepository.save(
+            MovieEntity(
+                enabled = true,
+                id = null,
+                title = "Test",
+                movieStatus = MovieStatusEntity.WATCHED,
+                launchDate = LocalDate.of(2025,3,17),
+                duration = 120,
+                image = "image",
+                createdAt = LocalDate.now(),
+                updatedAt = LocalDate.now(),
+                review = null
+            )
+        )
+        mockMvc.perform(
+            MockMvcRequestBuilders.get("/v1/movie?page=0&limit=1&movieStatus=WATCHED")
+                .contentType("application/json")
+        )
+            .andDo(MockMvcResultHandlers.print())
+            .andExpect(status().isOk)
+            .andExpect(content().string("[{\"id\":${savedMovie.id},\"title\":\"Test\",\"launchDate\":[2025,3,17],\"duration\":120,\"review\":[],\"image\":\"image\",\"enabled\":true,\"movieStatus\":\"WATCHED\"}]"))
+    }
+
+
+    @Test
+    @WithMockUser(username = "admin", password = "admin", roles = ["INTEGRATION"])
+    fun getMoviesWithNameLike() {
+        val savedMovie = this.movieEntityRepository.save(
+            MovieEntity(
+                enabled = true,
+                id = null,
+                title = "Spiderman",
+                movieStatus = MovieStatusEntity.WATCHED,
+                launchDate = LocalDate.of(2025,3,17),
+                duration = 120,
+                image = "image",
+                createdAt = LocalDate.now(),
+                updatedAt = LocalDate.now(),
+                review = null
+            )
+        )
+        mockMvc.perform(
+            MockMvcRequestBuilders.get("/v1/movie?page=0&limit=1&movieStatus=WATCHED&nameLike=spider")
+                .contentType("application/json")
+        )
+            .andDo(MockMvcResultHandlers.print())
+            .andExpect(status().isOk)
+            .andExpect(content().string("[{\"id\":${savedMovie.id},\"title\":\"Spiderman\",\"launchDate\":[2025,3,17],\"duration\":120,\"review\":[],\"image\":\"image\",\"enabled\":true,\"movieStatus\":\"WATCHED\"}]"))
+    }
+
+
 }
