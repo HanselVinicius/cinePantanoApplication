@@ -7,6 +7,7 @@ import com.pantano.cinePantanoApplication.gateway.auth.entities.UserRoleEntity
 import com.pantano.cinePantanoApplication.gateway.movie.entities.MovieEntity
 import com.pantano.cinePantanoApplication.gateway.movie.entities.MovieEntityRepository
 import com.pantano.cinePantanoApplication.gateway.movie.entities.MovieStatusEntity
+import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -43,6 +44,11 @@ class MovieControllerTestIT {
         )
     }
 
+    @AfterEach
+    fun afterEach() {
+        this.movieEntityRepository.deleteAll()
+    }
+
     @Test
     @WithMockUser(username = "admin", password = "admin", roles = ["INTEGRATION"])
     fun getToWatchMovies() {
@@ -51,7 +57,7 @@ class MovieControllerTestIT {
                 enabled = true,
                 id = null,
                 title = "Test",
-                launchDate = LocalDate.of(2025,3,17),
+                launchDate = LocalDate.of(2025, 3, 17),
                 duration = 120,
                 movieStatus = MovieStatusEntity.TO_WATCH,
                 image = "image",
@@ -69,7 +75,6 @@ class MovieControllerTestIT {
             .andExpect(content().string("[{\"id\":${savedMovie.id},\"title\":\"Test\",\"launchDate\":[2025,3,17],\"duration\":120,\"review\":[],\"image\":\"image\",\"enabled\":true,\"movieStatus\":\"TO_WATCH\"}]"))
     }
 
-
     @Test
     @WithMockUser(username = "admin", password = "admin", roles = ["INTEGRATION"])
     fun getWatchedMovies() {
@@ -79,7 +84,7 @@ class MovieControllerTestIT {
                 id = null,
                 title = "Test",
                 movieStatus = MovieStatusEntity.WATCHED,
-                launchDate = LocalDate.of(2025,3,17),
+                launchDate = LocalDate.of(2025, 3, 17),
                 duration = 120,
                 image = "image",
                 createdAt = LocalDate.now(),
@@ -96,7 +101,6 @@ class MovieControllerTestIT {
             .andExpect(content().string("[{\"id\":${savedMovie.id},\"title\":\"Test\",\"launchDate\":[2025,3,17],\"duration\":120,\"review\":[],\"image\":\"image\",\"enabled\":true,\"movieStatus\":\"WATCHED\"}]"))
     }
 
-
     @Test
     @WithMockUser(username = "admin", password = "admin", roles = ["INTEGRATION"])
     fun getMoviesWithNameLike() {
@@ -106,7 +110,7 @@ class MovieControllerTestIT {
                 id = null,
                 title = "Spiderman",
                 movieStatus = MovieStatusEntity.WATCHED,
-                launchDate = LocalDate.of(2025,3,17),
+                launchDate = LocalDate.of(2025, 3, 17),
                 duration = 120,
                 image = "image",
                 createdAt = LocalDate.now(),
@@ -123,5 +127,29 @@ class MovieControllerTestIT {
             .andExpect(content().string("[{\"id\":${savedMovie.id},\"title\":\"Spiderman\",\"launchDate\":[2025,3,17],\"duration\":120,\"review\":[],\"image\":\"image\",\"enabled\":true,\"movieStatus\":\"WATCHED\"}]"))
     }
 
-
+    @Test
+    @WithMockUser(username = "admin", password = "admin", roles = ["INTEGRATION"])
+    fun watchMovie() {
+        val savedMovie = this.movieEntityRepository.save(
+            MovieEntity(
+                enabled = true,
+                id = null,
+                title = "Test",
+                movieStatus = MovieStatusEntity.TO_WATCH,
+                launchDate = LocalDate.of(2025, 3, 17),
+                duration = 120,
+                image = "image",
+                createdAt = LocalDate.now(),
+                updatedAt = LocalDate.now(),
+                review = null
+            )
+        )
+        mockMvc.perform(
+            MockMvcRequestBuilders.patch("/v1/movie?id=${savedMovie.id}")
+                .contentType("application/json")
+        )
+            .andDo(MockMvcResultHandlers.print())
+            .andExpect(status().isOk)
+            .andExpect(content().string("{\"id\":${savedMovie.id},\"title\":\"Test\",\"launchDate\":[2025,3,17],\"duration\":120,\"review\":[],\"image\":\"image\",\"enabled\":true,\"movieStatus\":\"WATCHED\"}"))
+    }
 }

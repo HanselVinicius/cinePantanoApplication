@@ -3,6 +3,7 @@ package com.pantano.cinePantanoApplication.gateway.movie
 import com.pantano.cinePantanoApplication.core.application.gateway.movie.GetMovieGateway
 import com.pantano.cinePantanoApplication.core.domain.movie.Movie
 import com.pantano.cinePantanoApplication.core.domain.movie.dto.QueryMovieDto
+import com.pantano.cinePantanoApplication.core.domain.movie.exceptions.MovieNotFoundException
 import com.pantano.cinePantanoApplication.gateway.movie.entities.MovieEntityRepository
 import com.pantano.cinePantanoApplication.gateway.movie.entities.MovieStatusEntity
 import com.pantano.cinePantanoApplication.gateway.movie.mapper.MovieEntityMapper
@@ -31,5 +32,13 @@ class GetMovieGatewayImpl(private val movieEntityRepository: MovieEntityReposito
             MovieEntityMapper.toDomain(it)
         }
         return movieList.toList()
+    }
+
+    override fun getMovieById(id: Long): Movie {
+        val movieEntity = movieEntityRepository.findById(id).orElseThrow {
+            MovieNotFoundException("Movie not found with id: $id")
+        }
+
+        return MovieEntityMapper.toDomain(movieEntity)
     }
 }

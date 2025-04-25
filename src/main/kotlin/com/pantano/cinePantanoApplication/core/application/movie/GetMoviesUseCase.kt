@@ -9,4 +9,8 @@ class GetMoviesUseCase(private val getMovieGateway: GetMovieGateway) : GetMovieS
     override fun getMovies(queryMovieDto: QueryMovieDto): List<Movie> {
         return getMovieGateway.getMovies(queryMovieDto)
     }
+
+    override fun getMovieById(id: Long): Movie {
+        return getMovieGateway.getMovieById(id)
+    }
 }

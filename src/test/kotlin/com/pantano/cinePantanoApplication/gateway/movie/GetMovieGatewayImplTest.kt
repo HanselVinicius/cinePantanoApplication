@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test
 import org.springframework.data.domain.PageImpl
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.jpa.domain.Specification
+import java.util.*
 import kotlin.test.assertEquals
 
 class GetMovieGatewayImplTest {
@@ -76,5 +77,54 @@ class GetMovieGatewayImplTest {
         assertEquals(result[0].movieStatus, movie.movieStatus)
         assertEquals(result[0].review, movie.review)
         assertEquals(result[0].title, movie.title)
+    }
+
+    @Test
+    fun shouldCallFindByIdAndReturnAMovie() {
+        // arrange
+        val movie = Movie(
+            movieStatus = MovieStatus.TO_WATCH,
+            enabled = true,
+            image = "image",
+            id = 1,
+            title = "title",
+            launchDate = null,
+            duration = 120,
+            review = null
+        )
+        val movieEntity = MovieEntity(
+            movieStatus = MovieStatusEntity.TO_WATCH,
+            enabled = true,
+            image = "image",
+            id = 1,
+            title = "title",
+            launchDate = null,
+            duration = 120,
+            review = null,
+            updatedAt = null,
+            createdAt = null
+        )
+        val movieEntityRepository = mockk<MovieEntityRepository>()
+        val getMovieGatewayImpl = GetMovieGatewayImpl(movieEntityRepository)
+        every {
+            movieEntityRepository.findById(movie.id!!)
+        } returns Optional.of(movieEntity)
+        // act
+        val result = getMovieGatewayImpl.getMovieById(movie.id!!)
+        mockkObject(MovieEntityMapper)
+        every { MovieEntityMapper.toDomain(movieEntity) } returns movie
+        // assert
+
+        verify {
+            movieEntityRepository.findById(1)
+        }
+        assertEquals(result.id, movie.id)
+        assertEquals(result.launchDate, movie.launchDate)
+        assertEquals(result.duration, movie.duration)
+        assertEquals(result.enabled, movie.enabled)
+        assertEquals(result.image, movie.image)
+        assertEquals(result.movieStatus, movie.movieStatus)
+        assertEquals(result.review, movie.review)
+        assertEquals(result.title, movie.title)
     }
 }
