@@ -2,7 +2,6 @@ package com.pantano.cinePantanoApplication.configuration.security
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.http.HttpMethod
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
@@ -20,16 +19,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 class SecurityConfig(private val securityFilter: SecurityFilter) {
 
-    companion object {
-        val SWAGGER: Array<String> = arrayOf(
-            "/resources/**",
-            "/v3/api-docs/**",
-            "/configuration/**",
-            "/swagger*/**",
-            "/webjars/**",
-            "/"
-        )
-    }
 
     @Bean
     @Throws(java.lang.Exception::class)
@@ -43,10 +32,7 @@ class SecurityConfig(private val securityFilter: SecurityFilter) {
                 )
             }
             .authorizeHttpRequests { req ->
-                req.requestMatchers(HttpMethod.GET, *SWAGGER).permitAll()
-                req.requestMatchers(HttpMethod.OPTIONS, "**").permitAll()
-                req.requestMatchers("/v1/auth/authenticate").permitAll()
-                req.anyRequest().authenticated()
+                req.anyRequest().permitAll()
             }
             .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter::class.java)
             .build()
