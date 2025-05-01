@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("v1/movie")
-@SecurityRequirement(name = "bearer-key")
 class MovieController(
     private val getMovieService: GetMovieService,
     private val watchMovieService: WatchMovieService

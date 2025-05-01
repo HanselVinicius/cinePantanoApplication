@@ -4,7 +4,6 @@ import com.pantano.cinePantanoApplication.core.domain.auth.Auth
 import com.pantano.cinePantanoApplication.core.domain.auth.service.AuthenticateService
 import com.pantano.cinePantanoApplication.core.domain.auth.service.RegisterAuthService
 import com.pantano.cinePantanoApplication.entrypoint.http.dto.AuthDto
-import io.swagger.v3.oas.annotations.security.SecurityRequirement
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -25,7 +24,6 @@ class AuthController(private val authenticateService: AuthenticateService, priva
         )
     }
 
-    @SecurityRequirement(name = "bearer-key")
     @PostMapping("/register")
     fun register(@RequestBody autDto: AuthDto) {
         registerAuthService.register(
