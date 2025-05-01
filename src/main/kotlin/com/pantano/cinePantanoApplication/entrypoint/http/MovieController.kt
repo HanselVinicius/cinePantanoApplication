@@ -5,7 +5,6 @@ import com.pantano.cinePantanoApplication.core.domain.movie.MovieStatus
 import com.pantano.cinePantanoApplication.core.domain.movie.dto.QueryMovieDto
 import com.pantano.cinePantanoApplication.core.domain.movie.service.GetMovieService
 import com.pantano.cinePantanoApplication.core.domain.movie.service.WatchMovieService
-import io.swagger.v3.oas.annotations.security.SecurityRequirement
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
