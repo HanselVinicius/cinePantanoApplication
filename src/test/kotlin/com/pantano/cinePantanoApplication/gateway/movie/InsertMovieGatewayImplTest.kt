@@ -25,7 +25,8 @@ class InsertMovieGatewayImplTest {
             title = "title",
             launchDate = null,
             duration = 120,
-            review = null
+            review = null,
+            externalId = null
         )
         val movieEntity = MovieEntity(
             movieStatus = MovieStatusEntity.TO_WATCH,
@@ -37,7 +38,8 @@ class InsertMovieGatewayImplTest {
             duration = 120,
             review = null,
             updatedAt = null,
-            createdAt = null
+            createdAt = null,
+            externalId = null
         )
         mockkObject(MovieEntityMapper)
         every { MovieEntityMapper.toEntity(movie) } returns movieEntity

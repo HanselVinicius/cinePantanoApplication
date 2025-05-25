@@ -18,6 +18,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import java.time.LocalDate
+import java.util.UUID
 
 @IntegrationTest
 class MovieControllerTestIT {
@@ -31,8 +32,11 @@ class MovieControllerTestIT {
     @Autowired
     lateinit var authEntityRepository: AuthEntityRepository
 
+    lateinit var uuid: String
+
     @BeforeEach
     fun beforeEach() {
+        this.uuid = UUID.randomUUID().toString()
         authEntityRepository.save(
             AuthEntity(
                 principal = "admin",
@@ -63,7 +67,8 @@ class MovieControllerTestIT {
                 image = "image",
                 createdAt = LocalDate.now(),
                 updatedAt = LocalDate.now(),
-                review = null
+                review = null,
+                externalId = this.uuid
             )
         )
         mockMvc.perform(
@@ -72,7 +77,7 @@ class MovieControllerTestIT {
         )
             .andDo(MockMvcResultHandlers.print())
             .andExpect(status().isOk)
-            .andExpect(content().string("[{\"id\":${savedMovie.id},\"title\":\"Test\",\"launchDate\":[2025,3,17],\"duration\":120,\"review\":[],\"image\":\"image\",\"enabled\":true,\"movieStatus\":\"TO_WATCH\"}]"))
+            .andExpect(content().string("[{\"id\":${savedMovie.id},\"externalId\":\"${savedMovie.externalId}\",\"title\":\"Test\",\"launchDate\":[2025,3,17],\"duration\":120,\"review\":[],\"image\":\"image\",\"enabled\":true,\"movieStatus\":\"TO_WATCH\"}]"))
     }
 
     @Test
@@ -89,7 +94,8 @@ class MovieControllerTestIT {
                 image = "image",
                 createdAt = LocalDate.now(),
                 updatedAt = LocalDate.now(),
-                review = null
+                review = null,
+                externalId = this.uuid
             )
         )
         mockMvc.perform(
@@ -98,7 +104,7 @@ class MovieControllerTestIT {
         )
             .andDo(MockMvcResultHandlers.print())
             .andExpect(status().isOk)
-            .andExpect(content().string("[{\"id\":${savedMovie.id},\"title\":\"Test\",\"launchDate\":[2025,3,17],\"duration\":120,\"review\":[],\"image\":\"image\",\"enabled\":true,\"movieStatus\":\"WATCHED\"}]"))
+            .andExpect(content().string("[{\"id\":${savedMovie.id},\"externalId\":\"${savedMovie.externalId}\",\"title\":\"Test\",\"launchDate\":[2025,3,17],\"duration\":120,\"review\":[],\"image\":\"image\",\"enabled\":true,\"movieStatus\":\"WATCHED\"}]"))
     }
 
     @Test
@@ -115,7 +121,8 @@ class MovieControllerTestIT {
                 image = "image",
                 createdAt = LocalDate.now(),
                 updatedAt = LocalDate.now(),
-                review = null
+                review = null,
+                externalId = this.uuid
             )
         )
         mockMvc.perform(
@@ -124,7 +131,7 @@ class MovieControllerTestIT {
         )
             .andDo(MockMvcResultHandlers.print())
             .andExpect(status().isOk)
-            .andExpect(content().string("[{\"id\":${savedMovie.id},\"title\":\"Spiderman\",\"launchDate\":[2025,3,17],\"duration\":120,\"review\":[],\"image\":\"image\",\"enabled\":true,\"movieStatus\":\"WATCHED\"}]"))
+            .andExpect(content().string("[{\"id\":${savedMovie.id},\"externalId\":\"${savedMovie.externalId}\",\"title\":\"Spiderman\",\"launchDate\":[2025,3,17],\"duration\":120,\"review\":[],\"image\":\"image\",\"enabled\":true,\"movieStatus\":\"WATCHED\"}]"))
     }
 
     @Test
@@ -141,7 +148,8 @@ class MovieControllerTestIT {
                 image = "image",
                 createdAt = LocalDate.now(),
                 updatedAt = LocalDate.now(),
-                review = null
+                review = null,
+                externalId = this.uuid
             )
         )
         mockMvc.perform(
@@ -150,6 +158,6 @@ class MovieControllerTestIT {
         )
             .andDo(MockMvcResultHandlers.print())
             .andExpect(status().isOk)
-            .andExpect(content().string("{\"id\":${savedMovie.id},\"title\":\"Test\",\"launchDate\":[2025,3,17],\"duration\":120,\"review\":[],\"image\":\"image\",\"enabled\":true,\"movieStatus\":\"WATCHED\"}"))
+            .andExpect(content().string("{\"id\":${savedMovie.id},\"externalId\":\"${savedMovie.externalId}\",\"title\":\"Test\",\"launchDate\":[2025,3,17],\"duration\":120,\"review\":[],\"image\":\"image\",\"enabled\":true,\"movieStatus\":\"WATCHED\"}"))
     }
 }

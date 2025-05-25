@@ -4,6 +4,7 @@ import java.time.LocalDate
 
 class Movie(
     val id: Long?,
+    val externalId: String? = null,
     val title: String,
     val launchDate: LocalDate?,
     val duration: Int,
@@ -25,6 +26,6 @@ class Movie(
     }
 
     override fun toString(): String {
-        return "Movie(id=$id, title='$title', launchDate=$launchDate, duration=$duration, review=$review, image=$image, enabled=$enabled, movieStatus=$movieStatus)"
+        return "Movie(id=$id, externalId=$externalId, title='$title', launchDate=$launchDate, duration=$duration, review=$review, image=$image, enabled=$enabled, movieStatus=$movieStatus)"
     }
 }

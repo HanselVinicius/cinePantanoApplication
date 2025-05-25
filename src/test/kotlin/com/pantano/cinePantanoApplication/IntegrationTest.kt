@@ -12,6 +12,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension
 @ExtendWith(
     value = [
         MariaDBTestContainer::class,
+        RabbitMQTestContainer::class,
         SpringExtension::class
     ]
 )

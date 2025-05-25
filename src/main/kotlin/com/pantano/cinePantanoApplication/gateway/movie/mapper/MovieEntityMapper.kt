@@ -18,7 +18,8 @@ object MovieEntityMapper {
             },
             enabled = movie.enabled,
             movieStatus = MovieStatus.valueOf(movie.movieStatus.name),
-            image = movie.image
+            image = movie.image,
+            externalId = movie.externalId
         )
     }
 
@@ -35,7 +36,8 @@ object MovieEntityMapper {
             updatedAt = null,
             enabled = movie.enabled,
             movieStatus = MovieStatusEntity.valueOf(movie.movieStatus.name),
-            image = movie.image
+            image = movie.image,
+            externalId = movie.externalId
         )
     }
 
@@ -50,7 +52,8 @@ object MovieEntityMapper {
             updatedAt = null,
             enabled = movie.enabled,
             movieStatus = MovieStatusEntity.valueOf(movie.movieStatus.name),
-            image = movie.image
+            image = movie.image,
+            externalId = movie.externalId
         )
     }
 }

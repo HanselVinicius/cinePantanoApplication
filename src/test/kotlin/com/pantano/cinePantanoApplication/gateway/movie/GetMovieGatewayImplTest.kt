@@ -21,6 +21,8 @@ import kotlin.test.assertEquals
 
 class GetMovieGatewayImplTest {
 
+    private val uuid = UUID.randomUUID().toString()
+
     @Test
     fun shouldCallFindAllAndReturnAnListOfMovies() {
         // arrange
@@ -32,7 +34,8 @@ class GetMovieGatewayImplTest {
             title = "title",
             launchDate = null,
             duration = 120,
-            review = null
+            review = null,
+            externalId = uuid
         )
         val movieEntity = MovieEntity(
             movieStatus = MovieStatusEntity.TO_WATCH,
@@ -44,7 +47,8 @@ class GetMovieGatewayImplTest {
             duration = 120,
             review = null,
             updatedAt = null,
-            createdAt = null
+            createdAt = null,
+            externalId = uuid
         )
         val movieEntityRepository = mockk<MovieEntityRepository>()
         val getMovieGatewayImpl = GetMovieGatewayImpl(movieEntityRepository)
@@ -90,7 +94,8 @@ class GetMovieGatewayImplTest {
             title = "title",
             launchDate = null,
             duration = 120,
-            review = null
+            review = null,
+            externalId = uuid
         )
         val movieEntity = MovieEntity(
             movieStatus = MovieStatusEntity.TO_WATCH,
@@ -102,7 +107,8 @@ class GetMovieGatewayImplTest {
             duration = 120,
             review = null,
             updatedAt = null,
-            createdAt = null
+            createdAt = null,
+            externalId = uuid
         )
         val movieEntityRepository = mockk<MovieEntityRepository>()
         val getMovieGatewayImpl = GetMovieGatewayImpl(movieEntityRepository)

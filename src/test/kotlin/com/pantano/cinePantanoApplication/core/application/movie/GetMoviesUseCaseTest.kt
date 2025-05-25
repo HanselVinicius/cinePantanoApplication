@@ -9,6 +9,7 @@ import org.mockito.Mockito.mock
 import org.mockito.Mockito.verify
 import org.mockito.Mockito.`when`
 import java.time.LocalDate
+import java.util.UUID
 import kotlin.test.Test
 
 class GetMoviesUseCaseTest {
@@ -28,7 +29,8 @@ class GetMoviesUseCaseTest {
                 duration = 120,
                 review = null,
                 image = null,
-                enabled = true
+                enabled = true,
+                externalId = UUID.randomUUID().toString()
             )
         }
     }

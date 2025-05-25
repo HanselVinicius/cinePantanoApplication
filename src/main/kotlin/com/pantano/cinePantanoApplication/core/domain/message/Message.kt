@@ -3,7 +3,7 @@ package com.pantano.cinePantanoApplication.core.domain.message
 import com.pantano.cinePantanoApplication.core.domain.author.Author
 import com.pantano.cinePantanoApplication.core.domain.message.vo.MessageType
 import com.pantano.cinePantanoApplication.core.domain.movie.Movie
-import com.pantano.cinePantanoApplication.core.domain.movie.MovieStatus
+import com.pantano.cinePantanoApplication.core.domain.movie.factory.MovieFactory
 import java.time.LocalDate
 
 class Message(
@@ -26,14 +26,11 @@ class Message(
             image = this.attachment.first()?.url
         }
 
-        return Movie(
+        val movieFactory = MovieFactory()
+        return movieFactory.createMovie(
             title = this.content,
-            movieStatus = MovieStatus.TO_WATCH,
+            launchDate = LocalDate.of(this.timestamp.year, this.timestamp.monthValue, this.timestamp.dayOfMonth),
             duration = 0,
-            id = null,
-            launchDate = null,
-            review = null,
-            enabled = true,
             image = image
         )
     }

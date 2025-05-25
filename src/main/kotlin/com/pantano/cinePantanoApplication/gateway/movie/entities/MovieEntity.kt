@@ -14,6 +14,7 @@ import org.hibernate.annotations.CreationTimestamp
 import org.hibernate.annotations.SQLRestriction
 import org.hibernate.annotations.UpdateTimestamp
 import java.time.LocalDate
+import java.util.UUID
 
 @Entity(name = "movie")
 @Table(name = "movie")
@@ -22,6 +23,8 @@ class MovieEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long?,
+    @Column(unique = true)
+    val externalId: String? = UUID.randomUUID().toString(),
     @Lob
     val title: String,
     val launchDate: LocalDate?,

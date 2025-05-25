@@ -13,8 +13,11 @@ import io.mockk.verify
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import java.time.LocalDate
+import java.util.UUID
 
 class WatchMovieGatewayImplTest {
+
+    private val uuid = UUID.randomUUID().toString()
 
     @Test
     fun shouldCallWatchMovieGatewayAndReturnMovie() {
@@ -27,7 +30,8 @@ class WatchMovieGatewayImplTest {
             review = null,
             image = null,
             enabled = true,
-            movieStatus = MovieStatus.WATCHED
+            movieStatus = MovieStatus.WATCHED,
+            externalId = uuid
         )
 
         val movieEntity = MovieEntity(
@@ -40,7 +44,8 @@ class WatchMovieGatewayImplTest {
             image = "image",
             createdAt = LocalDate.now(),
             updatedAt = LocalDate.now(),
-            review = null
+            review = null,
+            externalId = uuid
         )
         val movieEntityRepository = mockk<MovieEntityRepository>()
         val watchMovieGateway = WatchMovieGatewayImpl(movieEntityRepository)
