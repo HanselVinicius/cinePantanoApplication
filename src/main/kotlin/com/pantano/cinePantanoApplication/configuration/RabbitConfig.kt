@@ -29,7 +29,6 @@ class RabbitConfig {
     @Bean
     fun messageBinding(): Binding = BindingBuilder.bind(messageQueue()).to(messageExchange()).withQueueName()
 
-
     @Bean
     fun movieQueue(): Queue {
         return Queue("movieQueue", true)
@@ -41,5 +40,4 @@ class RabbitConfig {
 
     @Bean
     fun movieBinding(): Binding = BindingBuilder.bind(movieQueue()).to(movieExchange()).withQueueName()
-
 }
