@@ -34,9 +34,9 @@ class GetMovieGatewayImpl(private val movieEntityRepository: MovieEntityReposito
         return movieList.toList()
     }
 
-    override fun getMovieById(id: Long): Movie {
-        val movieEntity = movieEntityRepository.findById(id).orElseThrow {
-            MovieNotFoundException("Movie not found with id: $id")
+    override fun getMovieByExternalId(externalId: String): Movie {
+        val movieEntity = movieEntityRepository.findByExternalId(externalId).orElseThrow {
+            MovieNotFoundException("Movie not found with id: $externalId")
         }
 
         return MovieEntityMapper.toDomain(movieEntity)

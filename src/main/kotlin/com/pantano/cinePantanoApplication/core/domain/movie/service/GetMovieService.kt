@@ -6,5 +6,5 @@ import com.pantano.cinePantanoApplication.core.domain.movie.dto.QueryMovieDto
 interface GetMovieService {
     fun getMovies(queryMovieDto: QueryMovieDto): List<Movie>
 
-    fun getMovieById(id: Long): Movie
+    fun getMovieByExternalId(id: String): Movie
 }

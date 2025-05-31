@@ -113,16 +113,16 @@ class GetMovieGatewayImplTest {
         val movieEntityRepository = mockk<MovieEntityRepository>()
         val getMovieGatewayImpl = GetMovieGatewayImpl(movieEntityRepository)
         every {
-            movieEntityRepository.findById(movie.id!!)
+            movieEntityRepository.findByExternalId(movie.externalId!!)
         } returns Optional.of(movieEntity)
         // act
-        val result = getMovieGatewayImpl.getMovieById(movie.id!!)
+        val result = getMovieGatewayImpl.getMovieByExternalId(movie.externalId!!)
         mockkObject(MovieEntityMapper)
         every { MovieEntityMapper.toDomain(movieEntity) } returns movie
         // assert
 
         verify {
-            movieEntityRepository.findById(1)
+            movieEntityRepository.findByExternalId(uuid)
         }
         assertEquals(result.id, movie.id)
         assertEquals(result.launchDate, movie.launchDate)

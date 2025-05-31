@@ -65,16 +65,16 @@ class GetMoviesUseCaseTest {
         // arrange
         val getMovieGateway = mock(GetMovieGateway::class.java)
         val getMoviesUseCase = GetMoviesUseCase(getMovieGateway)
-        val id = 1L
+        val id = "1L"
         `when`(
-            getMovieGateway.getMovieById(id)
+            getMovieGateway.getMovieByExternalId(id)
         ).thenReturn(
             movie
         )
         // act
-        val result = getMoviesUseCase.getMovieById(id)
+        val result = getMoviesUseCase.getMovieByExternalId(id)
         // assert
-        verify(getMovieGateway).getMovieById(id)
+        verify(getMovieGateway).getMovieByExternalId(id)
         assert(result.id == movie.id)
         assert(result.title == movie.title)
         assert(result.duration == movie.duration)

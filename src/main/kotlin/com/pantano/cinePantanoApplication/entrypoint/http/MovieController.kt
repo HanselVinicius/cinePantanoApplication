@@ -8,6 +8,7 @@ import com.pantano.cinePantanoApplication.core.domain.movie.service.WatchMovieSe
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
@@ -35,11 +36,11 @@ class MovieController(
         return getMovieService.getMovies(queryMovieDto)
     }
 
-    @PatchMapping
+    @PatchMapping("/{externalId}")
     fun watchMovie(
-        @RequestParam(required = true) id: Long
+        @PathVariable(required = true) externalId: String
     ): ResponseEntity<Movie> {
-        val movie = this.getMovieService.getMovieById(id)
+        val movie = this.getMovieService.getMovieByExternalId(externalId)
         val watchedMovie = this.watchMovieService.watchMovie(movie)
         return ResponseEntity.ok(watchedMovie)
     }

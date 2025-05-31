@@ -153,7 +153,7 @@ class MovieControllerTestIT {
             )
         )
         mockMvc.perform(
-            MockMvcRequestBuilders.patch("/v1/movie?id=${savedMovie.id}")
+            MockMvcRequestBuilders.patch("/v1/movie/${savedMovie.externalId}")
                 .contentType("application/json")
         )
             .andDo(MockMvcResultHandlers.print())

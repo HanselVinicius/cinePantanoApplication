@@ -3,6 +3,7 @@ package com.pantano.cinePantanoApplication.core.domain.movie.factory
 import com.pantano.cinePantanoApplication.core.domain.movie.Movie
 import com.pantano.cinePantanoApplication.core.domain.movie.MovieStatus
 import java.time.LocalDate
+import java.util.UUID
 
 class MovieFactory {
     fun createMovie(title: String, launchDate: LocalDate, duration: Int, image: String? = ""): Movie {
@@ -14,7 +15,7 @@ class MovieFactory {
             review = null,
             image = image,
             enabled = true,
-            externalId = null,
+            externalId = UUID.randomUUID().toString(),
             movieStatus = MovieStatus.TO_WATCH
         )
     }
