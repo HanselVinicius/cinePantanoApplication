@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository
 import java.util.Optional
 
 @Repository
-interface MovieEntityRepository : JpaRepository<MovieEntity, Long>, JpaSpecificationExecutor<MovieEntity>{
+interface MovieEntityRepository : JpaRepository<MovieEntity, Long>, JpaSpecificationExecutor<MovieEntity> {
     fun findByExternalId(externalId: String): Optional<MovieEntity>
 }

@@ -28,4 +28,12 @@ class ExceptionHandler {
         )
         return ResponseEntity(errorResponse, HttpStatus.UNAUTHORIZED)
     }
+
+    @ExceptionHandler(IllegalArgumentException::class)
+    fun handleIllegalArgumentException(exception: IllegalArgumentException): ResponseEntity<ErrorResponse> {
+        val errorResponse = ErrorResponse(
+            message = exception.message ?: "Invalid argument"
+        )
+        return ResponseEntity(errorResponse, HttpStatus.BAD_REQUEST)
+    }
 }
